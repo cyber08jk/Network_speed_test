@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cyber08jk/Network_speed_test/issues"
   },
-  "homepage": "https://github.com/cyber08jk/Network_speed_test#readme"
+  "homepage": "https://github.com/cyber08jk/Network_speed_test#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
