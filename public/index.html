@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Realtime Internet Speed Test</title>
+  <style>
+    body { font-family: Arial; text-align: center; background: #111; color: #fff; }
+    .card { margin: 20px auto; padding: 20px; background: #222; width: 300px; border-radius: 8px; }
+    h2 { color: #0f0; }
+  </style>
+</head>
+<body>
+  <h1>Realtime Internet Speed Dashboard</h1>
+
+  <div class="card"><h2 id="ping">Ping: -- ms</h2></div>
+  <div class="card"><h2 id="download">Download: -- Mbps</h2></div>
+  <div class="card"><h2 id="upload">Upload: -- Mbps</h2></div>
+
+<script>
+async function testPing() {
+  const start = performance.now();
+  await fetch('/download?nocache=' + Math.random(), { method: 'GET', cache: 'no-store' });
+  const end = performance.now();
+  const ping = (end - start).toFixed(2);
+  document.getElementById('ping').innerText = `Ping: ${ping} ms`;
+}
+
+async function testDownload() {
+  const start = performance.now();
+  const response = await fetch('/download?nocache=' + Math.random(), { cache: 'no-store' });
+  const reader = response.body.getReader();
+  let bytesReceived = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    bytesReceived += value.length;
+  }
+  const end = performance.now();
+  const duration = (end - start) / 1000; // seconds
+  const bitsLoaded = bytesReceived * 8;
+  const mbps = (bitsLoaded / duration / (1024*1024)).toFixed(2);
+  document.getElementById('download').innerText = `Download: ${mbps} Mbps`;
+}
+
+async function testUpload() {
+  const payload = new Uint8Array(10 * 1024 * 1024); // 10MB
+  const start = performance.now();
+  await fetch('/upload', { method: 'POST', body: payload });
+  const end = performance.now();
+  const duration = (end - start) / 1000; // seconds
+  const bitsSent = payload.length * 8;
+  const mbps = (bitsSent / duration / (1024*1024)).toFixed(2);
+  document.getElementById('upload').innerText = `Upload: ${mbps} Mbps`;
+}
+
+async function runTests() {
+  await testPing();
+  await testDownload();
+  await testUpload();
+}
+
+runTests();
+</script>
+</body>
+</html>
