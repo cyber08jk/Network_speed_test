@@ -1,0 +1,131 @@
+⚡ Internet Speed Basics
+
+Network speed is measured in:
+
+Download speed → How fast you can receive data from the internet.
+
+Upload speed → How fast you can send data to the internet.
+
+Latency (ping) → Time it takes for a request to go to the server and come back.
+
+Jitter → Variation in latency over multiple requests.
+
+Usually shown in Mbps (Megabits per second).
+
+📝 Formula for Speed
+
+The basic formula is:
+
+Speed (bps)
+=
+Data Transferred (bits)
+Time Taken (seconds)
+Speed (bps)=
+Time Taken (seconds)
+Data Transferred (bits)
+	​
+
+
+Then convert to Mbps:
+
+Speed (Mbps)
+=
+Data (bytes)
+×
+8
+Time (ms)
+×
+1000
+Speed (Mbps)=
+Time (ms)×1000
+Data (bytes)×8
+	​
+
+🔎 Example Calculation (Download)
+
+Start a timer (T1).
+
+Request a large file (say 10 MB) from a server.
+
+When the file finishes downloading, stop the timer (T2).
+
+Time taken = T2 - T1.
+
+Speed = 
+(
+10
+×
+1024
+×
+1024
+×
+8
+)
+/
+time in seconds
+(10×1024×1024×8)/time in seconds.
+
+👉 If a 10 MB file takes 2 seconds to download:
+
+10
+×
+1024
+×
+1024
+×
+8
+2
+=
+41
+,
+943
+,
+040
+ 
+bps
+≈
+41.9
+ 
+Mbps
+2
+10×1024×1024×8
+	​
+
+=41,943,040bps≈41.9Mbps
+🔎 Example Calculation (Upload)
+
+Generate random data (say 5 MB).
+
+Start a timer, send it to the server via POST.
+
+Stop timer when upload completes.
+
+Apply same formula.
+
+🔎 Example Calculation (Ping)
+
+Send a tiny request to the server (/ping).
+
+Note the time it takes to get a response.
+
+That’s your ping in ms.
+
+👉 If request takes 40 ms → Ping = 40 ms.
+
+🔎 Example Calculation (Jitter)
+
+Run ping test multiple times.
+
+Find differences between consecutive results.
+
+Average them.
+
+📌 Tools / Code
+
+If you want to measure speed in your own website:
+
+Frontend (JS): use fetch() or XMLHttpRequest to download/upload data and track time.
+
+Backend: provide endpoints for large downloads and uploads.
+
+Math: use the formula above.
